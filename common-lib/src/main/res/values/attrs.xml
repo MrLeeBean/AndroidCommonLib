@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <!--主题：Theme-->
+    <!--Theme:TopBar颜色-->
+    <attr name="colorUITopBarBg" format="color" />
+    <!--Theme:StatusBar颜色-->
+    <attr name="colorUIStatusBarBg" format="color" />
+
+
+    <!--控件：XEditText-->
+    <declare-styleable name="XEditText">
+        <attr name="x_separator" format="string" />
+        <attr name="x_disableClear" format="boolean" />
+        <attr name="x_clearDrawable" format="reference" />
+        <attr name="x_showPwdDrawable" format="reference" />
+        <attr name="x_hidePwdDrawable" format="reference" />
+        <attr name="x_disableEmoji" format="boolean" />
+        <attr name="x_disableTogglePwdDrawable" format="boolean" />
+    </declare-styleable>
+
+
+    <!--控件：XButton-->
+    <declare-styleable name="XButton">
+
+        <!--text color-->
+        <attr name="normalTextColor" format="color|reference" />
+        <attr name="pressedTextColor" format="color|reference" />
+        <attr name="unableTextColor" format="color|reference" />
+
+        <!--stroke width and color, dash width, dash gap-->
+        <attr name="strokeDashWidth" format="dimension|reference" />
+        <attr name="strokeDashGap" format="dimension|reference" />
+        <attr name="normalStrokeWidth" format="dimension|reference" />
+        <attr name="pressedStrokeWidth" format="dimension|reference" />
+        <attr name="unableStrokeWidth" format="dimension|reference" />
+        <attr name="normalStrokeColor" format="color|reference" />
+        <attr name="pressedStrokeColor" format="color|reference" />
+        <attr name="unableStrokeColor" format="color|reference" />
+
+        <!--background color-->
+        <attr name="normalBackgroundColor" format="color|reference" />
+        <attr name="pressedBackgroundColor" format="color|reference" />
+        <attr name="unableBackgroundColor" format="color|reference" />
+
+        <!--background radius-->
+        <attr name="radius" format="dimension|reference" />
+        <attr name="round" format="boolean|reference" />
+
+        <!--animation duration-->
+        <attr name="animationDuration" format="integer|reference" />
+
+    </declare-styleable>
+
+
+    <!--XLoadingView-->
+    <declare-styleable name="XLoadingView">
+        <attr name="loading_view_size" format="dimension" />
+        <attr name="android:color" />
+    </declare-styleable>
+    <attr name="XLoadingStyle" format="reference" />
+
+
+</resources>

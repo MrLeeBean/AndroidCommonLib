@@ -1,0 +1,83 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    //----------------------BashTheme------------------------//
+
+    <!--基本主题-->
+    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">#0082F6</item>
+        <item name="colorPrimaryDark">#1974C5</item>
+        <item name="colorAccent">?attr/colorPrimary</item>
+        <item name="android:textViewStyle">@style/BaseTextViewStyle</item>
+        <item name="android:statusBarColor" tools:targetApi="LOLLIPOP">?attr/colorUIStatusBarBg</item>
+
+        <!--自定义的属性-->
+        <item name="colorUITopBarBg" >?attr/colorPrimary</item>
+        <item name="colorUIStatusBarBg" >?attr/colorPrimary</item>
+
+    </style>
+
+    <!--沉浸式状态栏主题-->
+    <style name="BaseAppThemeTranslucentBars" parent="BaseAppTheme">
+        <item name="android:windowTranslucentStatus" tools:targetApi="LOLLIPOP">true</item>
+        <item name="android:windowTranslucentNavigation" tools:targetApi="LOLLIPOP">false</item>
+        <item name="android:statusBarColor" tools:targetApi="LOLLIPOP">@android:color/transparent</item>
+    </style>
+
+
+    //----------------------Theme------------------------//
+    <!--二维码扫描-->
+    <style name="QrCodeAppTheme" parent="BaseAppTheme">
+        <!--自定义的属性-->
+        <item name="colorUIStatusBarBg" >@color/colorTranslucence</item>
+        <item name="colorUITopBarBg" >@color/colorTranslucence</item>
+    </style>
+
+
+    //----------------------Style------------------------//
+    <!--条目默认的style-->
+    <style name="BaseLongItemDefault">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">54dp</item>
+        <item name="android:background">@drawable/base_item_default_selector</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingLeft">15dp</item>
+        <item name="android:paddingRight">15dp</item>
+    </style>
+
+    <!--文字样式统一style-->
+    <style name="BaseTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/colorText</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <!--文字样式Second统一style-->
+    <style name="BaseTextViewStyleSecond" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/colorTextSecond</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+
+    //----------------------Widget------------------------//
+
+    <!--XTipDialog-->
+    <style name="XTipDialog" parent="android:Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <!--权限请求特定主题-->
+    <style name="PermissionTheme" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+</resources>
