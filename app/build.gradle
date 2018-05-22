@@ -21,5 +21,6 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     compile "com.android.support:appcompat-v7:$rootProject.ext.supportLibraryVersion"
-    compile project(':common-lib')
+//    compile project(':common-lib')
+    implementation 'com.github.changshuai7:AndroidCommonLib:1.0.0'
 }
