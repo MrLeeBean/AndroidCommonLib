@@ -58,7 +58,7 @@ public class BaseApplication extends Application {
     /**
      * 初始化OkGo网络框架。如果这样的配置不合适，请覆盖此方法。
      */
-    private void initOkgo() {
+    public void initOkgo() {
 
         OkGo.getInstance().init(this);
         OkDownload.getInstance().setFolder(FileHelper.getDownloadApkCachePath());
