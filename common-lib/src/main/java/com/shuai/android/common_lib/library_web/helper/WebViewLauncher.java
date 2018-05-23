@@ -49,7 +49,7 @@ public class WebViewLauncher {
     /**
      * NA-WEB
      */
-    public void goNaWeb() {
+    public void goNaWeb(String interceptStr) {
         Intent i = new Intent(context, WebMainActivity.class);
         i.putExtra(WebViewConfig.KEY_TYPE, WebViewConfig.WEB_TYPE_NAWEB);
         i.putExtra(WebViewConfig.KEY_TITLE, title);
@@ -57,6 +57,7 @@ public class WebViewLauncher {
         i.putExtra(WebViewConfig.KEY_POST_DATA, postData);
         i.putExtra(WebViewConfig.KEY_EXTRA_DATA, extraData);
         i.putExtra(WebViewConfig.KEY_THEME,theme);
+        i.putExtra(WebViewConfig.KEY_NAWEB_INTERCEPT_STR,interceptStr);
         context.startActivity(i);
     }
 

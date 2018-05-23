@@ -17,9 +17,11 @@ import com.shuai.android.common_lib.R;
 import com.shuai.android.common_lib.library_common.exception.AppExceptionHandler;
 import com.shuai.android.common_lib.library_common.core.BusHelper;
 import com.shuai.android.common_lib.library_common.utils.ALog;
+import com.shuai.android.common_lib.library_common.utils.LangUtils;
 import com.shuai.android.common_lib.library_config.router.BusConstants;
 import com.just.agentweb.AgentWeb;
 import com.just.agentweb.DefaultWebClient;
+import com.shuai.android.common_lib.library_config.webview.WebViewConfig;
 
 import java.net.URLDecoder;
 
@@ -87,13 +89,18 @@ public class NABridgeWebFragment extends AgentWebFragment {
         public boolean shouldOverrideUrlLoading(final WebView view, String url) {
 
             ALog.d("WebView页面内响应的URL:"+url);
+            String nawebInterceptStr = NABridgeWebFragment.this.getArguments().getString(WebViewConfig.KEY_NAWEB_INTERCEPT_STR);
+            if (LangUtils.isNullOrEmpty(nawebInterceptStr)){
+                return false;
+            }
+
             //NA-WEB 协议内容处理
-            if (url.contains("hengchang://puhui.com/?hc_parms=")) {
+            if (url.contains(/*"hengchang://puhui.com/?hc_parms="*/nawebInterceptStr)) {
                 if (!url.trim().equals("")) {
                     try {
 
-                        int last = url.lastIndexOf("hc_parms=");
-                        String lastStr = url.substring(last + 9);
+                        int last = url.lastIndexOf(nawebInterceptStr);
+                        String lastStr = url.substring(last + nawebInterceptStr.length());
                         String params = URLDecoder.decode(lastStr, "UTF-8");
                         ALog.d("NA-Web交互数据:" + params);
 

@@ -71,16 +71,18 @@ public class WebMainActivity extends BaseActivity {
         String postData = getIntent().getStringExtra(WebViewConfig.KEY_POST_DATA);
         Serializable extraData = getIntent().getSerializableExtra(WebViewConfig.KEY_EXTRA_DATA);
 
+        String nawebInterceptStr = getIntent().getStringExtra(WebViewConfig.KEY_NAWEB_INTERCEPT_STR);
+
         mFragmentManager = this.getSupportFragmentManager();
 
-        openFragment(key, url, title, postData, aClassAgentWebFragment, extraData);
+        openFragment(key, url, title, postData, aClassAgentWebFragment, extraData,nawebInterceptStr);
 
     }
 
 
     private AgentWebFragment mAgentWebFragment;
 
-    private void openFragment(String key, String url, String title, String postData, Class<? extends AgentWebFragment> aClassAgentWebFragment, Serializable extraData) {
+    private void openFragment(String key, String url, String title, String postData, Class<? extends AgentWebFragment> aClassAgentWebFragment, Serializable extraData,String nawebInterceptStr) {
 
         FragmentTransaction ft = mFragmentManager.beginTransaction();
         Bundle mBundle = null;
@@ -105,6 +107,7 @@ public class WebMainActivity extends BaseActivity {
                 mBundle.putString(WebViewConfig.KEY_TITLE, title);
                 mBundle.putString(WebViewConfig.KEY_POST_DATA, postData);
                 mBundle.putSerializable(WebViewConfig.KEY_EXTRA_DATA, extraData);
+                mBundle.putSerializable(WebViewConfig.KEY_NAWEB_INTERCEPT_STR, nawebInterceptStr);
                 break;
 
             /*自定义*/

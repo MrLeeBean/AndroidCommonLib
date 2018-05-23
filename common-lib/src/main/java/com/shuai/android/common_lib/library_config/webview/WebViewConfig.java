@@ -13,6 +13,7 @@ public class WebViewConfig {
     public static final String KEY_FRAGMENT="key_fragment";
     public static final String KEY_EXTRA_DATA="key_extra_data";
     public static final String KEY_THEME = "key_theme";
+    public static final String KEY_NAWEB_INTERCEPT_STR = "key_naweb_intercept_str";
 
     public static final String WEB_TYPE_DEFAULT = "web_type_default";
     public static final String WEB_TYPE_NAWEB = "web_type_naweb";
