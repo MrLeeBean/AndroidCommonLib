@@ -42,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
     public void onWebviewDataReceived(HashMap map) {//这里的s就是WebView交互的数据
 
 
-        Activity ac = (Activity) map.get(BusConstants.BUS_EVENT_NA_WEB_ALLPARAMS_AC);
-        String s = (String) map.get(BusConstants.BUS_EVENT_NA_WEB_ALLPARAMS_DATA);
+        Activity ac = (Activity) map.get(BusConstants.BUS_EVENT_NA_WEB_ALLPARAMS_AC);//activity对象
+        String s = (String) map.get(BusConstants.BUS_EVENT_NA_WEB_ALLPARAMS_DATA);//params
 
         XToast.showInfoShort(ac, ac.getClass().getName().toString());
 
