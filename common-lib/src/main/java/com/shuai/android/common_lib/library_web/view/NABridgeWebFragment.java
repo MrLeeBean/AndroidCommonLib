@@ -24,6 +24,8 @@ import com.just.agentweb.DefaultWebClient;
 import com.shuai.android.common_lib.library_config.webview.WebViewConfig;
 
 import java.net.URLDecoder;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -104,7 +106,14 @@ public class NABridgeWebFragment extends AgentWebFragment {
                         String params = URLDecoder.decode(lastStr, "UTF-8");
                         ALog.d("NA-Web交互数据:" + params);
 
+                        //old--将来将要废弃
                         BusHelper.get().post(BusConstants.BUS_EVENT_NA_WEB_PARAMS, params);
+
+                        //new--多重数据返回
+                        Map<String ,Object> map = new HashMap<>();
+                        map.put(BusConstants.BUS_EVENT_NA_WEB_ALLPARAMS_AC,getActivity());
+                        map.put(BusConstants.BUS_EVENT_NA_WEB_ALLPARAMS_DATA,params);
+                        BusHelper.get().post(BusConstants.BUS_EVENT_NA_WEB_ALLPARAMS, map);
 
                         return true;
                     } catch (Exception e) {

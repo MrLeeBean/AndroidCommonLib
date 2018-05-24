@@ -1,9 +1,11 @@
 package com.shuai.android.commonlib.demo;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
+import com.hwangjr.rxbus.Bus;
 import com.hwangjr.rxbus.annotation.Subscribe;
 import com.hwangjr.rxbus.annotation.Tag;
 import com.hwangjr.rxbus.thread.EventThread;
@@ -11,6 +13,8 @@ import com.shuai.android.common_lib.library_common.core.BusHelper;
 import com.shuai.android.common_lib.library_common.widget.XToast;
 import com.shuai.android.common_lib.library_config.router.BusConstants;
 import com.shuai.android.common_lib.library_web.helper.WebViewLauncher;
+
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -33,11 +37,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    @Subscribe(thread = EventThread.MAIN_THREAD, tags = {@Tag(value = BusConstants.BUS_EVENT_NA_WEB_PARAMS)})
+    @Subscribe(thread = EventThread.MAIN_THREAD, tags = {@Tag(value = BusConstants.BUS_EVENT_NA_WEB_ALLPARAMS)})
 
-    public void onWebviewDataReceived(String s) {//这里的s就是WebView交互的数据
+    public void onWebviewDataReceived(HashMap map) {//这里的s就是WebView交互的数据
 
-        XToast.showInfoShort(this,s);
+
+        Activity ac = (Activity) map.get(BusConstants.BUS_EVENT_NA_WEB_ALLPARAMS_AC);
+        String s = (String) map.get(BusConstants.BUS_EVENT_NA_WEB_ALLPARAMS_DATA);
+
+        XToast.showInfoShort(ac, ac.getClass().getName().toString());
 
         //如果有特殊的协议，请在这里写：
 
