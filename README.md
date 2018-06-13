@@ -24,7 +24,7 @@ Step 2. Add the dependency
 ```java
 
 
-
+##---------------Begin: proguard configuration for OKHttp  ----------
 #OkHttp
 -dontwarn okhttp3.**
 -keep class okhttp3.**{*;}
@@ -32,21 +32,28 @@ Step 2. Add the dependency
 #Okio
 -dontwarn okio.**
 -keep class okio.**{*;}
+##---------------End: proguard configuration for OKHttp  ----------
 
-#Glide
+
+##---------------Begin: proguard configuration for Glide  ----------
 -keep public class * implements com.bumptech.glide.module.GlideModule
 -keep public class * extends com.bumptech.glide.module.AppGlideModule
 -keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
   **[] $VALUES;
   public *;
 }
+##---------------End: proguard configuration for Glide  ----------
 
-#AgentWeb
+
+##---------------Begin: proguard configuration for AgentWeb  ----------
 -keep class com.just.agentweb.** {
     *;
 }
 -dontwarn com.just.agentweb.**
+##---------------End: proguard configuration for AgentWeb  ----------
 
+
+##---------------Begin: proguard configuration for Rx ----------
 #Rxjava RxAndroid
 -dontwarn rx.*
 -dontwarn sun.misc.**
@@ -62,6 +69,8 @@ rx.internal.util.atomic.LinkedQueueNode consumerNode;
 -keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
 rx.internal.util.atomic.LinkedQueueNode consumerNode;
 }
+##---------------End: proguard configuration for Rx ----------
+
 
 ##---------------Begin: proguard configuration for Gson  ----------
 # Gson uses generic type information stored in a class file when working with fields. Proguard
