@@ -31,8 +31,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 new WebViewLauncher.Builder(MainActivity.this)
                         .setUrl(url)
+                        .setBarLightMode(true)
+                        .setTheme(R.style.AppTheme)
                         .build()
-                        .goNaWeb("hengchang://puhui.com/?hc_parms=");
+                        .go();
+//                        .goNaWeb("hengchang://puhui.com/?hc_parms=");
             }
         });
     }

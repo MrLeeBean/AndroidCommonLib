@@ -22,6 +22,7 @@ public class WebViewLauncher {
     private String postData;
     private Serializable extraData;
     private int theme;
+    private boolean barLightMode;
 
     public WebViewLauncher(WebViewLauncher.Builder builder) {
         this.context = builder.context;
@@ -30,6 +31,7 @@ public class WebViewLauncher {
         this.postData = builder.postData;
         this.extraData = builder.extraData;
         this.theme =builder.theme;
+        this.barLightMode = builder.barLightMode;
     }
 
     /**
@@ -43,6 +45,7 @@ public class WebViewLauncher {
         i.putExtra(WebViewConfig.KEY_POST_DATA, postData);
         i.putExtra(WebViewConfig.KEY_EXTRA_DATA, extraData);
         i.putExtra(WebViewConfig.KEY_THEME,theme);
+        i.putExtra(WebViewConfig.KEY_BAR_LIGHT_MODE,barLightMode);
         context.startActivity(i);
     }
 
@@ -57,6 +60,7 @@ public class WebViewLauncher {
         i.putExtra(WebViewConfig.KEY_POST_DATA, postData);
         i.putExtra(WebViewConfig.KEY_EXTRA_DATA, extraData);
         i.putExtra(WebViewConfig.KEY_THEME,theme);
+        i.putExtra(WebViewConfig.KEY_BAR_LIGHT_MODE,barLightMode);
         i.putExtra(WebViewConfig.KEY_NAWEB_INTERCEPT_STR,interceptStr);
         context.startActivity(i);
     }
@@ -75,6 +79,7 @@ public class WebViewLauncher {
         i.putExtra(WebViewConfig.KEY_POST_DATA, postData);
         i.putExtra(WebViewConfig.KEY_EXTRA_DATA, extraData);
         i.putExtra(WebViewConfig.KEY_THEME,theme);
+        i.putExtra(WebViewConfig.KEY_BAR_LIGHT_MODE,barLightMode);
         context.startActivity(i);
     }
 
@@ -86,6 +91,7 @@ public class WebViewLauncher {
         private String postData;
         private Serializable extraData;
         private int theme;
+        private boolean barLightMode;
 
 
         public Builder(Context context) {
@@ -114,6 +120,11 @@ public class WebViewLauncher {
 
         public WebViewLauncher.Builder setTheme(@StyleRes final int theme) {
             this.theme = theme;
+            return this;
+        }
+
+        public WebViewLauncher.Builder setBarLightMode(boolean barLightMode){
+            this.barLightMode = barLightMode;
             return this;
         }
 

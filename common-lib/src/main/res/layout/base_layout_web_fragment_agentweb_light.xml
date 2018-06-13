@@ -9,6 +9,12 @@
 
     <include
         android:id="@+id/toolbar"
-        layout="@layout/base_layout_toolbar_web"></include>
+        layout="@layout/base_layout_toolbar_web_light"></include>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorGray"></View>
 
 </LinearLayout>

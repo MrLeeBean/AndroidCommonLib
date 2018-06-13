@@ -70,19 +70,20 @@ public class WebMainActivity extends BaseActivity {
         String title = getIntent().getStringExtra(WebViewConfig.KEY_TITLE);
         String postData = getIntent().getStringExtra(WebViewConfig.KEY_POST_DATA);
         Serializable extraData = getIntent().getSerializableExtra(WebViewConfig.KEY_EXTRA_DATA);
+        boolean barLightMode = getIntent().getBooleanExtra(WebViewConfig.KEY_BAR_LIGHT_MODE,false);
 
         String nawebInterceptStr = getIntent().getStringExtra(WebViewConfig.KEY_NAWEB_INTERCEPT_STR);
 
         mFragmentManager = this.getSupportFragmentManager();
 
-        openFragment(key, url, title, postData, aClassAgentWebFragment, extraData,nawebInterceptStr);
+        openFragment(key, url, title, postData, aClassAgentWebFragment, extraData,nawebInterceptStr,barLightMode);
 
     }
 
 
     private AgentWebFragment mAgentWebFragment;
 
-    private void openFragment(String key, String url, String title, String postData, Class<? extends AgentWebFragment> aClassAgentWebFragment, Serializable extraData,String nawebInterceptStr) {
+    private void openFragment(String key, String url, String title, String postData, Class<? extends AgentWebFragment> aClassAgentWebFragment, Serializable extraData,String nawebInterceptStr ,boolean barLightMode) {
 
         FragmentTransaction ft = mFragmentManager.beginTransaction();
         Bundle mBundle = null;
@@ -97,6 +98,7 @@ public class WebMainActivity extends BaseActivity {
                 mBundle.putString(WebViewConfig.KEY_TITLE, title);
                 mBundle.putString(WebViewConfig.KEY_POST_DATA, postData);
                 mBundle.putSerializable(WebViewConfig.KEY_EXTRA_DATA, extraData);
+                mBundle.putBoolean(WebViewConfig.KEY_BAR_LIGHT_MODE, barLightMode);
                 break;
 
 
@@ -108,6 +110,7 @@ public class WebMainActivity extends BaseActivity {
                 mBundle.putString(WebViewConfig.KEY_POST_DATA, postData);
                 mBundle.putSerializable(WebViewConfig.KEY_EXTRA_DATA, extraData);
                 mBundle.putSerializable(WebViewConfig.KEY_NAWEB_INTERCEPT_STR, nawebInterceptStr);
+                mBundle.putBoolean(WebViewConfig.KEY_BAR_LIGHT_MODE, barLightMode);
                 break;
 
             /*自定义*/
@@ -131,6 +134,7 @@ public class WebMainActivity extends BaseActivity {
                 mBundle.putString(WebViewConfig.KEY_TITLE, title);
                 mBundle.putString(WebViewConfig.KEY_POST_DATA, postData);
                 mBundle.putSerializable(WebViewConfig.KEY_EXTRA_DATA, extraData);
+                mBundle.putBoolean(WebViewConfig.KEY_BAR_LIGHT_MODE, barLightMode);
                 break;
 
 

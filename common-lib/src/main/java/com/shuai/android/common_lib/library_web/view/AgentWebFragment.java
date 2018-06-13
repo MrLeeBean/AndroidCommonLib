@@ -25,6 +25,8 @@ import android.widget.TextView;
 import com.shuai.android.common_lib.R;
 import com.shuai.android.common_lib.library_common.application.BaseApplication;
 import com.shuai.android.common_lib.library_common.utils.ALog;
+import com.shuai.android.common_lib.library_common.utils.DisplayUtils;
+import com.shuai.android.common_lib.library_common.utils.StatusBarUtils;
 import com.shuai.android.common_lib.library_common.widget.XToast;
 import com.shuai.android.common_lib.library_config.webview.WebViewConfig;
 import com.shuai.android.common_lib.library_web.common.FragmentKeyDown;
@@ -75,6 +77,11 @@ public class AgentWebFragment extends Fragment implements FragmentKeyDown {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        boolean barLightMode = this.getArguments().getBoolean(WebViewConfig.KEY_BAR_LIGHT_MODE);
+        if (barLightMode){
+            StatusBarUtils.setStatusBarLightMode(getActivity());//设置状态栏颜色字体为深色
+            return inflater.inflate(R.layout.base_layout_web_fragment_agentweb_light, container, false);
+        }
         return inflater.inflate(R.layout.base_layout_web_fragment_agentweb, container, false);
     }
 
