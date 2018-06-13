@@ -23,37 +23,36 @@ Step 2. Add the dependency
 
 ```java
 
+#CommonLib
+-keep class com.shuai.android.common_lib.** { *; }
+-dontwarn com.shuai.android.common_lib.**
 
-##---------------Begin: proguard configuration for OKHttp  ----------
 #OkHttp
 -dontwarn okhttp3.**
 -keep class okhttp3.**{*;}
 
+
 #Okio
 -dontwarn okio.**
 -keep class okio.**{*;}
-##---------------End: proguard configuration for OKHttp  ----------
 
 
-##---------------Begin: proguard configuration for Glide  ----------
+#Glide
 -keep public class * implements com.bumptech.glide.module.GlideModule
 -keep public class * extends com.bumptech.glide.module.AppGlideModule
 -keep public enum com.bumptech.glide.load.ImageHeaderParser$** {
   **[] $VALUES;
   public *;
 }
-##---------------End: proguard configuration for Glide  ----------
 
 
-##---------------Begin: proguard configuration for AgentWeb  ----------
+#AgentWeb
 -keep class com.just.agentweb.** {
     *;
 }
 -dontwarn com.just.agentweb.**
-##---------------End: proguard configuration for AgentWeb  ----------
 
 
-##---------------Begin: proguard configuration for Rx ----------
 #Rxjava RxAndroid
 -dontwarn rx.*
 -dontwarn sun.misc.**
@@ -69,10 +68,9 @@ rx.internal.util.atomic.LinkedQueueNode consumerNode;
 -keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
 rx.internal.util.atomic.LinkedQueueNode consumerNode;
 }
-##---------------End: proguard configuration for Rx ----------
 
 
-##---------------Begin: proguard configuration for Gson  ----------
+# Gson
 # Gson uses generic type information stored in a class file when working with fields. Proguard
 # removes such information by default, so configure it to keep all of it.
 -keepattributes Signature
@@ -86,8 +84,6 @@ rx.internal.util.atomic.LinkedQueueNode consumerNode;
 
 # Application classes that will be serialized/deserialized over Gson   你自己的javabean需要混淆
 -keep class com.google.gson.examples.android.model.** { *; }
-
-##---------------End: proguard configuration for Gson  ----------
 
 
 
