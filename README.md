@@ -2,6 +2,7 @@
 Android快速开发公共库
 
 ## 文档
+文档不断更新中...
 地址：https://github.com/changshuai7/AndroidCommonLib/wiki
 
 ## 集成
