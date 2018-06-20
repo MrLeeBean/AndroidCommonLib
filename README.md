@@ -1,6 +1,9 @@
 # AndroidCommonLib
 Android快速开发公共库
 
+## 文档
+地址：https://github.com/changshuai7/AndroidCommonLib/wiki
+
 ## 集成
 Step 1：Add it in your root build.gradle at the end of repositories:
 
@@ -16,6 +19,9 @@ Step 2. Add the dependency
 	dependencies {
 	         implementation 'com.github.changshuai7:AndroidCommonLib:1.0.3'
 	}
+
+
+
 
 
 ## 混淆
