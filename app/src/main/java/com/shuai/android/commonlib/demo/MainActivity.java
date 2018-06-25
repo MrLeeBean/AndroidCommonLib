@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
                 new WebViewLauncher.Builder(MainActivity.this)
                         .setUrl(url)
                         .setBarLightMode(true)
+                        .setTitleLength(1)
                         .setTheme(R.style.AppTheme)
                         .build()
                         .go();

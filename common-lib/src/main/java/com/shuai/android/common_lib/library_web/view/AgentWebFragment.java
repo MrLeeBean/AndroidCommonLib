@@ -2,12 +2,14 @@ package com.shuai.android.common_lib.library_web.view;
 
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -22,14 +24,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.shuai.android.common_lib.R;
-import com.shuai.android.common_lib.library_common.application.BaseApplication;
-import com.shuai.android.common_lib.library_common.utils.ALog;
-import com.shuai.android.common_lib.library_common.utils.DisplayUtils;
-import com.shuai.android.common_lib.library_common.utils.StatusBarUtils;
-import com.shuai.android.common_lib.library_common.widget.XToast;
-import com.shuai.android.common_lib.library_config.webview.WebViewConfig;
-import com.shuai.android.common_lib.library_web.common.FragmentKeyDown;
 import com.just.agentweb.AbsAgentWebSettings;
 import com.just.agentweb.AgentWeb;
 import com.just.agentweb.DefaultWebClient;
@@ -40,6 +34,13 @@ import com.just.agentweb.download.AgentWebDownloader;
 import com.just.agentweb.download.DefaultDownloadImpl;
 import com.just.agentweb.download.DownloadListenerAdapter;
 import com.just.agentweb.download.DownloadingService;
+import com.shuai.android.common_lib.R;
+import com.shuai.android.common_lib.library_common.application.BaseApplication;
+import com.shuai.android.common_lib.library_common.utils.ALog;
+import com.shuai.android.common_lib.library_common.utils.StatusBarUtils;
+import com.shuai.android.common_lib.library_common.widget.XToast;
+import com.shuai.android.common_lib.library_config.webview.WebViewConfig;
+import com.shuai.android.common_lib.library_web.common.FragmentKeyDown;
 
 import org.apache.http.util.EncodingUtils;
 
@@ -383,11 +384,16 @@ public class AgentWebFragment extends Fragment implements FragmentKeyDown {
         public void onReceivedTitle(WebView view, String title) {
             super.onReceivedTitle(view, title);
 
+            int titleLength = AgentWebFragment.this.getArguments().getInt(WebViewConfig.KEY_TITLE_LENGTH);
+            if (titleLength <= 0){
+                titleLength = 14;
+            }
+
             //自定义了Title且数据里不为null
             if (AgentWebFragment.this.getArguments().getString(WebViewConfig.KEY_TITLE) != null) {
                 String tit = AgentWebFragment.this.getArguments().getString(WebViewConfig.KEY_TITLE);
-                if (tit.length() > 14) {
-                    tit = tit.substring(0, 14).concat("...");
+                if (tit.length() > titleLength) {
+                    tit = tit.substring(0, titleLength).concat("...");
                 }
                 if (mToolbarTitle != null) {
                     mToolbarTitle.setText(tit);
@@ -397,8 +403,8 @@ public class AgentWebFragment extends Fragment implements FragmentKeyDown {
 
             //没有自定义Title或者数据里为null-采取<title>标签对中的数据
             if (mToolbarTitle != null && !TextUtils.isEmpty(title)) {
-                if (title.length() > 14)
-                    title = title.substring(0, 14).concat("...");
+                if (title.length() > titleLength)
+                    title = title.substring(0, titleLength).concat("...");
             }
             if (mToolbarTitle != null) {
                 mToolbarTitle.setText(title);
@@ -417,7 +423,38 @@ public class AgentWebFragment extends Fragment implements FragmentKeyDown {
         @Override
         public void onReceivedSslError(WebView webView, SslErrorHandler sslErrorHandler, SslError sslError) {
             //sslErrorHandler.cancel();//默认的处理方式，WebView变成空白页
-            sslErrorHandler.proceed();//接受证书，解决部分非https页面证书问题导致的空白。
+            //sslErrorHandler.proceed();//接受证书，解决部分非https页面证书问题导致的空白。
+
+            final SslErrorHandler mHandler ;
+            mHandler= sslErrorHandler;
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage("SSL证书验证失败");
+            builder.setPositiveButton("继续", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    mHandler.proceed();
+                }
+            });
+            builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    mHandler.cancel();
+                }
+            });
+            builder.setOnKeyListener(new DialogInterface.OnKeyListener() {
+                @Override
+                public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                    if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+                        mHandler.cancel();
+                        dialog.dismiss();
+                        return true;
+                    }
+                    return false;
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
 
         }
 

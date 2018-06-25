@@ -1,10 +1,13 @@
 package com.shuai.android.common_lib.library_web.view;
 
 
+import android.content.DialogInterface;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.v7.app.AlertDialog;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.SslErrorHandler;
@@ -13,14 +16,14 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 
+import com.just.agentweb.AgentWeb;
+import com.just.agentweb.DefaultWebClient;
 import com.shuai.android.common_lib.R;
-import com.shuai.android.common_lib.library_common.exception.AppExceptionHandler;
 import com.shuai.android.common_lib.library_common.core.BusHelper;
+import com.shuai.android.common_lib.library_common.exception.AppExceptionHandler;
 import com.shuai.android.common_lib.library_common.utils.ALog;
 import com.shuai.android.common_lib.library_common.utils.LangUtils;
 import com.shuai.android.common_lib.library_config.router.BusConstants;
-import com.just.agentweb.AgentWeb;
-import com.just.agentweb.DefaultWebClient;
 import com.shuai.android.common_lib.library_config.webview.WebViewConfig;
 
 import java.net.URLDecoder;
@@ -76,7 +79,38 @@ public class NABridgeWebFragment extends AgentWebFragment {
         @Override
         public void onReceivedSslError(WebView webView, SslErrorHandler sslErrorHandler, SslError sslError) {
             //sslErrorHandler.cancel();//默认的处理方式，WebView变成空白页
-            sslErrorHandler.proceed();//接收证书
+            //sslErrorHandler.proceed();//接收证书
+
+            final SslErrorHandler mHandler ;
+            mHandler= sslErrorHandler;
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage("SSL证书验证失败");
+            builder.setPositiveButton("继续", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    mHandler.proceed();
+                }
+            });
+            builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    mHandler.cancel();
+                }
+            });
+            builder.setOnKeyListener(new DialogInterface.OnKeyListener() {
+                @Override
+                public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                    if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK) {
+                        mHandler.cancel();
+                        dialog.dismiss();
+                        return true;
+                    }
+                    return false;
+                }
+            });
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
 
         }
 

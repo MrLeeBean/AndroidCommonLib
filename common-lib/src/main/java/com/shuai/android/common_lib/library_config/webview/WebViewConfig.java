@@ -10,6 +10,7 @@ public class WebViewConfig {
     public static final String KEY_POST_DATA = "key_post_data";
     public static final String KEY_TYPE = "key_type";
     public static final String KEY_TITLE = "key_title";
+    public static final String KEY_TITLE_LENGTH = "key_title_length";
     public static final String KEY_FRAGMENT="key_fragment";
     public static final String KEY_EXTRA_DATA="key_extra_data";
     public static final String KEY_THEME = "key_theme";

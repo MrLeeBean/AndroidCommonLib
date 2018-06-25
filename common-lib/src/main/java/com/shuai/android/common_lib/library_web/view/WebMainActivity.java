@@ -8,6 +8,8 @@ import android.text.TextUtils;
 import android.view.KeyEvent;
 import android.widget.FrameLayout;
 
+import com.hwangjr.rxbus.annotation.Subscribe;
+import com.hwangjr.rxbus.annotation.Tag;
 import com.shuai.android.common_lib.R;
 import com.shuai.android.common_lib.library_common.base.BaseActivity;
 import com.shuai.android.common_lib.library_common.core.BusHelper;
@@ -16,8 +18,6 @@ import com.shuai.android.common_lib.library_common.utils.ALog;
 import com.shuai.android.common_lib.library_config.router.BusConstants;
 import com.shuai.android.common_lib.library_config.webview.WebViewConfig;
 import com.shuai.android.common_lib.library_web.common.FragmentKeyDown;
-import com.hwangjr.rxbus.annotation.Subscribe;
-import com.hwangjr.rxbus.annotation.Tag;
 
 import java.io.Serializable;
 import java.lang.reflect.Method;
@@ -39,7 +39,7 @@ public class WebMainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         try{
-            int theme = getIntent().getIntExtra(WebViewConfig.KEY_THEME,R.style.BaseAppTheme);
+            int theme = getIntent().getIntExtra(WebViewConfig.KEY_THEME, R.style.BaseAppTheme);
             setTheme(theme);//设置主题
         }catch (Exception e){
             AppExceptionHandler.doHandle(e,"设置WebView出题发生异常");
@@ -68,6 +68,7 @@ public class WebMainActivity extends BaseActivity {
 
         String url = getIntent().getStringExtra(WebViewConfig.KEY_URL);
         String title = getIntent().getStringExtra(WebViewConfig.KEY_TITLE);
+        int titleLength = getIntent().getIntExtra(WebViewConfig.KEY_TITLE_LENGTH,14);
         String postData = getIntent().getStringExtra(WebViewConfig.KEY_POST_DATA);
         Serializable extraData = getIntent().getSerializableExtra(WebViewConfig.KEY_EXTRA_DATA);
         boolean barLightMode = getIntent().getBooleanExtra(WebViewConfig.KEY_BAR_LIGHT_MODE,false);
@@ -76,14 +77,14 @@ public class WebMainActivity extends BaseActivity {
 
         mFragmentManager = this.getSupportFragmentManager();
 
-        openFragment(key, url, title, postData, aClassAgentWebFragment, extraData,nawebInterceptStr,barLightMode);
+        openFragment(key, url, title, titleLength,postData, aClassAgentWebFragment, extraData,nawebInterceptStr,barLightMode);
 
     }
 
 
     private AgentWebFragment mAgentWebFragment;
 
-    private void openFragment(String key, String url, String title, String postData, Class<? extends AgentWebFragment> aClassAgentWebFragment, Serializable extraData,String nawebInterceptStr ,boolean barLightMode) {
+    private void openFragment(String key, String url, String title, int titleLength, String postData, Class<? extends AgentWebFragment> aClassAgentWebFragment, Serializable extraData, String nawebInterceptStr , boolean barLightMode) {
 
         FragmentTransaction ft = mFragmentManager.beginTransaction();
         Bundle mBundle = null;
@@ -96,6 +97,7 @@ public class WebMainActivity extends BaseActivity {
                 ft.add(R.id.container_framelayout, mAgentWebFragment = AgentWebFragment.getInstance(mBundle = new Bundle()), AgentWebFragment.class.getName());
                 mBundle.putString(WebViewConfig.KEY_URL, url);
                 mBundle.putString(WebViewConfig.KEY_TITLE, title);
+                mBundle.putInt(WebViewConfig.KEY_TITLE_LENGTH,titleLength);
                 mBundle.putString(WebViewConfig.KEY_POST_DATA, postData);
                 mBundle.putSerializable(WebViewConfig.KEY_EXTRA_DATA, extraData);
                 mBundle.putBoolean(WebViewConfig.KEY_BAR_LIGHT_MODE, barLightMode);
@@ -107,6 +109,7 @@ public class WebMainActivity extends BaseActivity {
                 ft.add(R.id.container_framelayout, mAgentWebFragment = NABridgeWebFragment.getInstance(mBundle = new Bundle()), AgentWebFragment.class.getName());
                 mBundle.putString(WebViewConfig.KEY_URL, url);
                 mBundle.putString(WebViewConfig.KEY_TITLE, title);
+                mBundle.putInt(WebViewConfig.KEY_TITLE_LENGTH,titleLength);
                 mBundle.putString(WebViewConfig.KEY_POST_DATA, postData);
                 mBundle.putSerializable(WebViewConfig.KEY_EXTRA_DATA, extraData);
                 mBundle.putSerializable(WebViewConfig.KEY_NAWEB_INTERCEPT_STR, nawebInterceptStr);
@@ -132,6 +135,7 @@ public class WebMainActivity extends BaseActivity {
                 ft.add(R.id.container_framelayout, mAgentWebFragment, AgentWebFragment.class.getName());
                 mBundle.putString(WebViewConfig.KEY_URL, url);
                 mBundle.putString(WebViewConfig.KEY_TITLE, title);
+                mBundle.putInt(WebViewConfig.KEY_TITLE_LENGTH,titleLength);
                 mBundle.putString(WebViewConfig.KEY_POST_DATA, postData);
                 mBundle.putSerializable(WebViewConfig.KEY_EXTRA_DATA, extraData);
                 mBundle.putBoolean(WebViewConfig.KEY_BAR_LIGHT_MODE, barLightMode);

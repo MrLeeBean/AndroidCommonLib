@@ -19,6 +19,7 @@ public class WebViewLauncher {
     private Context context;
     private String url;
     private String title;
+    private int titleLength;
     private String postData;
     private Serializable extraData;
     private int theme;
@@ -28,6 +29,7 @@ public class WebViewLauncher {
         this.context = builder.context;
         this.url = builder.url;
         this.title = builder.title;
+        this.titleLength = builder.titleLength;
         this.postData = builder.postData;
         this.extraData = builder.extraData;
         this.theme =builder.theme;
@@ -41,6 +43,7 @@ public class WebViewLauncher {
         Intent i = new Intent(context, WebMainActivity.class);
         i.putExtra(WebViewConfig.KEY_TYPE, WebViewConfig.WEB_TYPE_DEFAULT);
         i.putExtra(WebViewConfig.KEY_TITLE, title);
+        i.putExtra(WebViewConfig.KEY_TITLE_LENGTH, titleLength);
         i.putExtra(WebViewConfig.KEY_URL, url);
         i.putExtra(WebViewConfig.KEY_POST_DATA, postData);
         i.putExtra(WebViewConfig.KEY_EXTRA_DATA, extraData);
@@ -56,6 +59,7 @@ public class WebViewLauncher {
         Intent i = new Intent(context, WebMainActivity.class);
         i.putExtra(WebViewConfig.KEY_TYPE, WebViewConfig.WEB_TYPE_NAWEB);
         i.putExtra(WebViewConfig.KEY_TITLE, title);
+        i.putExtra(WebViewConfig.KEY_TITLE_LENGTH, titleLength);
         i.putExtra(WebViewConfig.KEY_URL, url);
         i.putExtra(WebViewConfig.KEY_POST_DATA, postData);
         i.putExtra(WebViewConfig.KEY_EXTRA_DATA, extraData);
@@ -75,6 +79,7 @@ public class WebViewLauncher {
         i.putExtra(WebViewConfig.KEY_TYPE, WebViewConfig.WEB_TYPE_CUSTOM);
         i.putExtra(WebViewConfig.KEY_FRAGMENT, aClassAgentWebFragment);
         i.putExtra(WebViewConfig.KEY_TITLE, title);
+        i.putExtra(WebViewConfig.KEY_TITLE_LENGTH, titleLength);
         i.putExtra(WebViewConfig.KEY_URL, url);
         i.putExtra(WebViewConfig.KEY_POST_DATA, postData);
         i.putExtra(WebViewConfig.KEY_EXTRA_DATA, extraData);
@@ -88,6 +93,7 @@ public class WebViewLauncher {
         private Context context;
         private String url;
         private String title;
+        private int titleLength;
         private String postData;
         private Serializable extraData;
         private int theme;
@@ -105,6 +111,11 @@ public class WebViewLauncher {
 
         public WebViewLauncher.Builder setTitle(String title) {
             this.title = title;
+            return this;
+        }
+
+        public WebViewLauncher.Builder setTitleLength(int titleLength) {
+            this.titleLength = titleLength;
             return this;
         }
 
