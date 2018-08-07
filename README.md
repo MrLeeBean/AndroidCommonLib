@@ -24,10 +24,16 @@ Step 2: Add the dependency
 	
 Step 3: 创建Applicaiton
 
-        自定义的Application必须继承BaseApplication
-        public class MyApp extends BaseApplication {
-                 //code
-        }
+       自定义的Application必须继承BaseApplication
+       public class MyApp extends BaseApplication {
+
+          @Override
+          public void onCreate() {
+             super.onCreate();
+             AppConfig.ISDEBUG = BuildConfig.DEBUG;//Library的DEBUG随着编译环境而改变
+             AppConfig.IS_LOG_SHOW = BuildConfig.DEBUG;//DEBUG模式下才开启日志
+          }
+       }
        
         在Manifest中申明
         <application
