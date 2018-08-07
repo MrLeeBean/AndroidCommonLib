@@ -21,13 +21,14 @@ Step 2. Add the dependency
 	dependencies {
 	         implementation 'com.github.changshuai7:AndroidCommonLib:1.0.3'
 	}
-Step 3.创建Applicaiton，必须继承BaseApplication,并在Manifest中申明
+Step 3.创建Applicaiton
 
+       自定义的Application必须继承BaseApplication
        public class MyApp extends BaseApplication {
                 //code
        }
-
-Step4.
+       
+       在Manifest中申明
        <application
               ...
               android:name=".MyApp"
@@ -41,11 +42,15 @@ Step5:创建主题，必须继承BaseAppTheme或者BaseAppThemeTranslucentBars�
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-Step6：创建Activity和Fragment的基类。Activity必须继承BaseActivity；Framgent必须继承BaseFragment 
+
+Step6：创建Activity和Fragment的基类。
+
+      //Activity必须继承BaseActivity
       public class MyBaseActivity extends BaseActivity {
              //code...
       }
-
+      
+      //Framgent必须继承BaseFragment 
       public class MyBaseFragment extends BaseFragment {
              //code...
       }
