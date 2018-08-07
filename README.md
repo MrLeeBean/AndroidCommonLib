@@ -41,7 +41,12 @@ Step5:创建主题，必须继承BaseAppTheme或者BaseAppThemeTranslucentBars�
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-
+    
+   在Manifest中申明
+       <application
+              ...
+              android:theme="@style/MyAppTheme"
+              ...
 
 Step6：创建Activity和Fragment的基类。
 
